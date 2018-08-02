@@ -5,14 +5,11 @@ import core.jdbc.PreparedStatementSetter;
 import core.jdbc.RowMapper;
 import next.model.User;
 
-import java.security.spec.PSSParameterSpec;
 import java.sql.*;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 public class UserDao {
-    public void insert(User user) throws SQLException {
+    public void insert(User user) {
         JdbcTemplate template = new JdbcTemplate();
 
         PreparedStatementSetter pss = pstmt -> {
@@ -25,7 +22,7 @@ public class UserDao {
         template.update(sql, pss);
     }
 
-    public void update(User user) throws SQLException {
+    public void update(User user) {
         JdbcTemplate template = new JdbcTemplate();
 
         PreparedStatementSetter pss = pstmt -> {
@@ -38,7 +35,7 @@ public class UserDao {
         template.update(sql, pss);
     }
 
-    public void delete(String userId) throws SQLException {
+    public void delete(String userId) {
         JdbcTemplate template = new JdbcTemplate();
 
         PreparedStatementSetter pss = pstmt -> pstmt.setString(1, userId);
@@ -46,31 +43,31 @@ public class UserDao {
         template.update(sql, pss);
     }
 
-    public Collection<User> findAll() throws SQLException {
+    public List<User> findAll() {
         JdbcTemplate template = new JdbcTemplate();
         PreparedStatementSetter pss = pstmt -> {
         };
-        RowMapper rowMapper = rs -> new User(
+        RowMapper<User> rowMapper = rs -> new User(
                 rs.getString("userId"),
                 rs.getString("password"),
                 rs.getString("name"),
                 rs.getString("email"));
 
         String sql = "SELECT * FROM USERS";
-        return (List<User>) template.query(sql, pss, rowMapper);
+        return template.query(sql, rowMapper, pss);
     }
 
-    public User findByUserId(String userId) throws SQLException {
+    public User findByUserId(String userId) {
         JdbcTemplate template = new JdbcTemplate();
         PreparedStatementSetter pss = pstmt -> pstmt.setString(1, userId);
-        RowMapper rowMapper = rs -> new User(
+        RowMapper<User> rowMapper = rs -> new User(
                 rs.getString("userId"),
                 rs.getString("password"),
                 rs.getString("name"),
                 rs.getString("email"));
 
         String sql = "SELECT userId, password, name, email FROM USERS WHERE userid=?";
-        return (User) template.queryForObject(sql, pss, rowMapper);
+        return template.queryForObject(sql, rowMapper, pss);
     }
 }
 
