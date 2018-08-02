@@ -67,8 +67,6 @@ public class User {
         this.email = updateUser.email;
     }
 
-
-/*
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -77,6 +75,7 @@ public class User {
             return false;
         if (getClass() != obj.getClass())
             return false;
+
         User other = (User) obj;
         if (email == null) {
             if (other.email != null)
@@ -94,6 +93,6 @@ public class User {
         } else if (!userId.equals(other.userId))
             return false;
         return true;
-    }*/
+    }
 
 }

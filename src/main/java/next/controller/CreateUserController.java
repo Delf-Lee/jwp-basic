@@ -4,7 +4,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.org.apache.bcel.internal.generic.IUSHR;
 import core.mvc.Controller;
+import next.dao.UserDao;
 import next.model.User;
 
 import org.slf4j.Logger;
@@ -24,7 +26,8 @@ public class CreateUserController implements Controller {
                 req.getParameter("email"));
         log.debug("User : {}", user);
 
-        DataBase.addUser(user);
+        UserDao userDao = new UserDao();
+        userDao.insert(user);
         return "redirect:/";
     }
 }
