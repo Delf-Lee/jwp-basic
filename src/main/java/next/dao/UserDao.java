@@ -2,6 +2,7 @@ package next.dao;
 
 import core.jdbc.ConnectionManager;
 import core.jdbc.JdbcTemplate;
+import core.jdbc.SelectJdbcTemplate;
 import next.model.User;
 
 import java.sql.Connection;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 public class UserDao {
     public void insert(User user) throws SQLException {
@@ -54,70 +56,44 @@ public class UserDao {
     }
 
     public Collection<User> findAll() throws SQLException {
-        Connection con = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        try {
-            con = ConnectionManager.getConnection();
-            String sql = "SELECT userId, password, name, email FROM USERS";
-            pstmt = con.prepareStatement(sql);
+        String sql = "SELECT * FROM USERS";
+        SelectJdbcTemplate template = new SelectJdbcTemplate() {
+            @Override
+            public void setValues(PreparedStatement pstmt) throws SQLException {
 
-            rs = pstmt.executeQuery();
-
-            User user = null;
-            List<User> res = new ArrayList<User>();
-            if (rs.next()) {
-                res.add(new User(rs.getString("userId"),
-                        rs.getString("password"),
-                        rs.getString("name"),
-                        rs.getString("email")));
             }
 
-            return res;
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (pstmt != null) {
-                pstmt.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-    }
-
-    public User findByUserId(String userId) throws SQLException {
-        Connection con = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        try {
-            con = ConnectionManager.getConnection();
-            String sql = "SELECT userId, password, name, email FROM USERS WHERE userid=?";
-            pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, userId);
-
-            rs = pstmt.executeQuery();
-
-            User user = null;
-            if (rs.next()) {
-                user = new User(rs.getString("userId"),
+            @Override
+            public Object mapRow(ResultSet rs) throws SQLException {
+                return new User(
+                        rs.getString("userId"),
                         rs.getString("password"),
                         rs.getString("name"),
                         rs.getString("email"));
             }
+        };
+        return (List<User>) template.query(sql);
+    }
 
-            return user;
-        } finally {
-            if (rs != null) {
-                rs.close();
+    public User findByUserId(String userId) throws SQLException {
+        String sql = "SELECT userId, password, name, email FROM USERS WHERE userid=?";
+        SelectJdbcTemplate template = new SelectJdbcTemplate() {
+            @Override
+            public void setValues(PreparedStatement pstmt) throws SQLException {
+                pstmt.setString(1, userId);
             }
-            if (pstmt != null) {
-                pstmt.close();
+
+            @Override
+            public Object mapRow(ResultSet rs) throws SQLException {
+                return new User(
+                        rs.getString("userId"),
+                        rs.getString("password"),
+                        rs.getString("name"),
+                        rs.getString("email"));
             }
-            if (con != null) {
-                con.close();
-            }
-        }
+        };
+        return (User) template.queryForObject(sql);
     }
 }
+
+
