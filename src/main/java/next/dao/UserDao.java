@@ -22,7 +22,7 @@ public class UserDao {
         template.update(sql, pss);
     }
 
-    public void update(User user) {
+    /*public void update(User user) {
         JdbcTemplate template = new JdbcTemplate();
 
         PreparedStatementSetter pss = pstmt -> {
@@ -33,6 +33,12 @@ public class UserDao {
         };
         String sql = "UPDATE USERS SET password = ?, name = ?, email = ? WHERE userId = ?";
         template.update(sql, pss);
+    }*/
+
+    public void update(User user) {
+        JdbcTemplate template = new JdbcTemplate();
+        String sql = "UPDATE USERS SET password = ?, name = ?, email = ? WHERE userId = ?";
+        template.update(sql, user.getPassword(), user.getName(), user.getEmail(), user.getUserId());
     }
 
     public void delete(String userId) {

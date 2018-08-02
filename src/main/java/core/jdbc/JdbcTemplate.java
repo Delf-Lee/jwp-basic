@@ -18,6 +18,18 @@ public class JdbcTemplate {
         }
     }
 
+    public void update(String sql, Object... parameters) throws DataAccessException {
+        try (Connection con = ConnectionManager.getConnection();
+             PreparedStatement pstmt = con.prepareStatement(sql)) {
+            for (int i = 0; i < parameters.length; i++) {
+                pstmt.setObject(i + 1, parameters[i]);
+            }
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DataAccessException(e);
+        }
+    }
+
     public <T> T queryForObject(String sql, RowMapper<T> rm, PreparedStatementSetter pss) {
         List<T> list = query(sql, rm, pss);
         if (list.isEmpty()) {
