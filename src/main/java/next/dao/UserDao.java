@@ -1,6 +1,5 @@
 package next.dao;
 
-
 import core.jdbc.ConnectionManager;
 import core.jdbc.JdbcTemplate;
 import next.model.User;
@@ -15,14 +14,10 @@ import java.util.List;
 
 public class UserDao {
     public void insert(User user) throws SQLException {
+        String sql = "INSERT INTO USERS VALUES (?, ?, ?, ?)";
         JdbcTemplate template = new JdbcTemplate() {
             @Override
-            public String createQuery() {
-                return "INSERT INTO USERS VALUES (?, ?, ?, ?)";
-            }
-
-            @Override
-            public void setValues(User user, PreparedStatement pstmt) throws SQLException {
+            public void setValues(PreparedStatement pstmt) throws SQLException {
                 pstmt.setString(1, user.getUserId());
                 pstmt.setString(2, user.getPassword());
                 pstmt.setString(3, user.getName());
@@ -30,25 +25,32 @@ public class UserDao {
             }
         };
 
-        template.update(user);
+        template.update(sql);
     }
 
     public void update(User user) throws SQLException {
+        String sql = "UPDATE USERS SET password = ?, name = ?, email = ? WHERE userId = ?";
         JdbcTemplate template = new JdbcTemplate() {
             @Override
-            public String createQuery() {
-                return "UPDATE USERS SET password = ?, name = ?, email = ? WHERE userId = ?";
-            }
-
-            @Override
-            public void setValues(User user, PreparedStatement pstmt) throws SQLException {
+            public void setValues(PreparedStatement pstmt) throws SQLException {
                 pstmt.setString(1, user.getPassword());
                 pstmt.setString(2, user.getName());
                 pstmt.setString(3, user.getEmail());
                 pstmt.setString(4, user.getUserId());
             }
         };
-        template.update(user);
+        template.update(sql);
+    }
+
+    public void delete(String userId) throws SQLException {
+        String sql = "DELETE FROM USERS WHERE userId=?";
+        JdbcTemplate template = new JdbcTemplate() {
+            @Override
+            public void setValues(PreparedStatement pstmt) throws SQLException {
+                pstmt.setString(1, userId);
+            }
+        };
+        template.update(sql);
     }
 
     public Collection<User> findAll() throws SQLException {

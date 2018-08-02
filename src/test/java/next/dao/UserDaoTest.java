@@ -41,9 +41,8 @@ public class UserDaoTest {
         UserDao userDao = new UserDao();
         List<User> users = (List<User>) userDao.findAll();
         assertEquals(1, users.size());
-        /*userDao.removeUser(users.get(0).getUserId());
+        userDao.delete(users.get(0).getUserId());
         users = (List<User>) userDao.findAll();
         assertEquals(0, users.size());
-        assertEquals(0, users.size());*/
     }
 }
