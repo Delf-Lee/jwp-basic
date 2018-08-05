@@ -2,6 +2,7 @@ package next.controller;
 
 import core.mvc.Controller;
 import core.db.DataBase;
+import next.dao.QuestionDao;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 public class HomeController implements Controller {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        req.setAttribute("users", DataBase.findAll());
+        QuestionDao questionDao = new QuestionDao();
+        req.setAttribute("questions", questionDao.findAll());
         return "home.jsp";
     }
 }

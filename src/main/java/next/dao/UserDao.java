@@ -11,7 +11,6 @@ import java.util.List;
 public class UserDao {
     public void insert(User user) {
         JdbcTemplate template = new JdbcTemplate();
-        System.out.println("--------------------------------------insert");
         PreparedStatementSetter pss = pstmt -> {
             pstmt.setString(1, user.getUserId());
             pstmt.setString(2, user.getPassword());
