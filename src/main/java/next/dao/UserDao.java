@@ -11,7 +11,7 @@ import java.util.List;
 public class UserDao {
     public void insert(User user) {
         JdbcTemplate template = new JdbcTemplate();
-
+        System.out.println("--------------------------------------insert");
         PreparedStatementSetter pss = pstmt -> {
             pstmt.setString(1, user.getUserId());
             pstmt.setString(2, user.getPassword());
@@ -22,20 +22,8 @@ public class UserDao {
         template.update(sql, pss);
     }
 
-    /*public void update(User user) {
-        JdbcTemplate template = new JdbcTemplate();
-
-        PreparedStatementSetter pss = pstmt -> {
-            pstmt.setString(1, user.getPassword());
-            pstmt.setString(2, user.getName());
-            pstmt.setString(3, user.getEmail());
-            pstmt.setString(4, user.getUserId());
-        };
-        String sql = "UPDATE USERS SET password = ?, name = ?, email = ? WHERE userId = ?";
-        template.update(sql, pss);
-    }*/
-
     public void update(User user) {
+
         JdbcTemplate template = new JdbcTemplate();
         String sql = "UPDATE USERS SET password = ?, name = ?, email = ? WHERE userId = ?";
         template.update(sql, user.getPassword(), user.getName(), user.getEmail(), user.getUserId());

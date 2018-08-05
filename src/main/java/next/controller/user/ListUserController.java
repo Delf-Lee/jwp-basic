@@ -1,4 +1,4 @@
-package next.controller;
+package next.controller.user;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import core.mvc.Controller;
 import core.db.DataBase;
+import next.controller.UserSessionUtils;
 
 public class ListUserController implements Controller {
     @Override

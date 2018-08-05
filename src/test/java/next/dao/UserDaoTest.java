@@ -39,10 +39,10 @@ public class UserDaoTest {
     @Test
     public void findAll() throws Exception {
         UserDao userDao = new UserDao();
-        List<User> users = (List<User>) userDao.findAll();
+        List<User> users = userDao.findAll();
         assertEquals(1, users.size());
         userDao.delete(users.get(0).getUserId());
-        users = (List<User>) userDao.findAll();
+        users = userDao.findAll();
         assertEquals(0, users.size());
     }
 }
