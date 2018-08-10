@@ -10,9 +10,9 @@ import core.jdbc.RowMapper;
 
 public class QuestionDao {
     public List<Question> findAll() {
+        System.out.println("----Question findAll");
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
-        String sql = "SELECT questionId, writer, title, createdDate, countOfAnswer FROM QUESTIONS "
-                + "order by questionId desc";
+        String sql = "SELECT questionId, writer, title, createdDate, countOfAnswer FROM QUESTIONS order by questionId desc";
 
         RowMapper<Question> rm = new RowMapper<Question>() {
             @Override
@@ -28,7 +28,7 @@ public class QuestionDao {
 
     public Question findById(long questionId) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
-        String sql = "SELECT questionId, writer, title, contents, createdDate, countOfAnswer FROM QUESTIONS "
+        String sql = "SELECT questionId, writer , title, contents, createdDate, countOfAnswer FROM QUESTIONS "
                 + "WHERE questionId = ?";
 
         RowMapper<Question> rm = new RowMapper<Question>() {
