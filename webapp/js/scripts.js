@@ -14,7 +14,7 @@ function addAnswer(e) {
         error: onError,
         success : onSuccess,
     });
-}ㅇ
+}
 
 function onSuccess(json, status){
     var answerTemplate = $("#answerTemplate").html();

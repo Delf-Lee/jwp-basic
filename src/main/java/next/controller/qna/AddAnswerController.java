@@ -19,7 +19,6 @@ public class AddAnswerController implements Controller {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        log.debug("--------answer");
         Answer answer = new Answer(req.getParameter("writer"), req.getParameter("contents"),
                 Long.parseLong(req.getParameter("questionId")));
         log.debug("answer : {}", answer);
