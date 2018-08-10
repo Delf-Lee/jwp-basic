@@ -49,7 +49,7 @@
                     </ul>
                 </div>
                 <div class="col-md-3 qna-write">
-                    <a href="./qna/form" class="btn btn-primary pull-right" role="button">질문하기</a>
+                    <a href="/qna/form" class="btn btn-primary pull-right" role="button">질문하기</a>
                 </div>
             </div>
         </div>
@@ -60,6 +60,7 @@
 <!--
 <div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
+
   <div class="modal-content">
       <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
