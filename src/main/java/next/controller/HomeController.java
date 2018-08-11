@@ -1,6 +1,8 @@
 package next.controller;
 
 import core.mvc.Controller;
+import core.mvc.JspView;
+import core.mvc.ModelAndView;
 import next.dao.QuestionDao;
 import next.model.Question;
 
@@ -10,12 +12,12 @@ import java.util.List;
 
 public class HomeController implements Controller {
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         QuestionDao questionDao = new QuestionDao();
         req.setAttribute("questions", questionDao.findAll());
         List<Question> list = questionDao.findAll();
         System.out.println("list size: " + list.size());
 
-        return "home.jsp";
+        return new ModelAndView(new JspView("home.jsp"));
     }
 }

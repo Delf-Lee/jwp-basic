@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import core.mvc.Controller;
+import core.mvc.JspView;
+import core.mvc.ModelAndView;
 import next.dao.UserDao;
 import next.model.User;
 
@@ -14,7 +16,7 @@ public class CreateUserController implements Controller {
     private static final Logger log = LoggerFactory.getLogger(CreateUserController.class);
 
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         User user = new User(req.getParameter(
                 "userId"),
                 req.getParameter("password"),
@@ -24,6 +26,6 @@ public class CreateUserController implements Controller {
 
         UserDao userDao = new UserDao();
         userDao.insert(user);
-        return "redirect:/";
+        return new ModelAndView(new JspView("redirect:/"));
     }
 }
