@@ -1,8 +1,6 @@
 package next.controller;
 
 import core.mvc.AbstractController;
-import core.mvc.Controller;
-import core.mvc.JspView;
 import core.mvc.ModelAndView;
 import next.dao.QuestionDao;
 import next.model.Question;
@@ -19,6 +17,6 @@ public class HomeController extends AbstractController {
         List<Question> list = questionDao.findAll();
         System.out.println("list size: " + list.size());
 
-        return new ModelAndView(new JspView("home.jsp"));
+        return jspView("home.jsp");
     }
 }

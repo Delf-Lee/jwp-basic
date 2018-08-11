@@ -1,24 +1,27 @@
 package next.controller.qna;
 
+import core.jdbc.DataAccessException;
+import core.mvc.AbstractController;
+import core.mvc.ModelAndView;
+import next.dao.AnswerDao;
+import next.model.Result;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import core.mvc.AbstractController;
-import core.mvc.Controller;
-import core.mvc.JsonView;
-import core.mvc.ModelAndView;
-import next.dao.AnswerDao;
-
 public class DeleteAnswerController extends AbstractController {
+    private AnswerDao answerDao = new AnswerDao();
+
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         Long answerId = Long.parseLong(req.getParameter("answerId"));
-        AnswerDao answerDao = new AnswerDao();
-        answerDao.delete(answerId);
-        return new ModelAndView(new JsonView());
-       /* ObjectMapper mapper = new ObjectMapper();
-        resp.setContentType("application/json;charset=UTF-8");
-        PrintWriter out = resp.getWriter();
-        out.print(mapper.writeValueAsString(Result.ok()));*/
+        ModelAndView mav = jsonView();
+        try {
+            answerDao.delete(answerId);
+            mav.addObject("result", Result.ok());
+        } catch (DataAccessException e) {
+            mav.addObject("result", Result.fail(e.getMessage()));
+        }
+        return mav;
     }
 }

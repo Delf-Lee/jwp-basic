@@ -1,21 +1,14 @@
 package next.controller.qna;
 
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import core.mvc.AbstractController;
-import core.mvc.JsonView;
 import core.mvc.ModelAndView;
+import next.dao.AnswerDao;
+import next.model.Answer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import core.mvc.Controller;
-import next.dao.AnswerDao;
-import next.model.Answer;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class AddAnswerController extends AbstractController {
     private static final Logger log = LoggerFactory.getLogger(AddAnswerController.class);
@@ -28,11 +21,6 @@ public class AddAnswerController extends AbstractController {
 
         AnswerDao answerDao = new AnswerDao();
         Answer savedAnswer = answerDao.insert(answer);
-        return new ModelAndView(new JsonView()).addObject("answer", savedAnswer);
-
-        /*ObjectMapper mapper = new ObjectMapper();
-        resp.setContentType("application/json;charset=UTF-8");
-        PrintWriter out = resp.getWriter();
-        out.print(mapper.writeValueAsString(savedAnswer));*/
+        return jsonView().addObject("answer", savedAnswer);
     }
 }

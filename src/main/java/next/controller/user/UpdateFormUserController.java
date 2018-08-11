@@ -1,15 +1,13 @@
 package next.controller.user;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import core.mvc.AbstractController;
-import core.mvc.Controller;
-import core.mvc.JspView;
 import core.mvc.ModelAndView;
 import next.controller.UserSessionUtils;
 import next.dao.UserDao;
 import next.model.User;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class UpdateFormUserController extends AbstractController {
 
@@ -22,6 +20,6 @@ public class UpdateFormUserController extends AbstractController {
             throw new IllegalStateException("다른 사용자의 정보를 수정할 수 없습니다.");
         }
         req.setAttribute("user", user);
-        return new ModelAndView(new JspView("/user/updateForm.jsp"));
+        return jspView("/user/updateForm.jsp");
     }
 }

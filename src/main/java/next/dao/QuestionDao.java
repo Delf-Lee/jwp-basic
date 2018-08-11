@@ -1,12 +1,12 @@
 package next.dao;
 
+import core.jdbc.JdbcTemplate;
+import core.jdbc.RowMapper;
+import next.model.Question;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
-import next.model.Question;
-import core.jdbc.JdbcTemplate;
-import core.jdbc.RowMapper;
 
 public class QuestionDao {
     public List<Question> findAll() {

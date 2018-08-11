@@ -1,14 +1,12 @@
 package next.controller.user;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import core.mvc.AbstractController;
-import core.mvc.Controller;
-import core.mvc.JspView;
 import core.mvc.ModelAndView;
 import next.dao.UserDao;
 import next.model.User;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class ProfileController extends AbstractController {
     @Override
@@ -20,6 +18,6 @@ public class ProfileController extends AbstractController {
             throw new NullPointerException("사용자를 찾을 수 없습니다.");
         }
         req.setAttribute("user", user);
-        return new ModelAndView(new JspView("/user/profile.jsp"));
+        return jspView("/user/profile.jsp");
     }
 }

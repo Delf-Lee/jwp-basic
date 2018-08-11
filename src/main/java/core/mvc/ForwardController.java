@@ -6,15 +6,15 @@ import javax.servlet.http.HttpServletResponse;
 public class ForwardController extends AbstractController {
     private String forwardUrl;
 
-    public ForwardController(String forwardUrl) { // 아니 이렇게 되면 매 요청마다 컨트롤로 객체가 생성되는거 아냐?
+    public ForwardController(String forwardUrl) {
         this.forwardUrl = forwardUrl;
-        if (forwardUrl == null) {
-            throw new NullPointerException("forward is null. Enter URL to move.");
-        }
     }
 
     @Override
     public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        return new ModelAndView(new JspView(forwardUrl));
+        if (forwardUrl == null) {
+            throw new NullPointerException("forwardUrl is null. 이동할 URL을 입력하세요.");
+        }
+        return jspView(forwardUrl);
     }
 }

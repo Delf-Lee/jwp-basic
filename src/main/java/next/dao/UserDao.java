@@ -5,7 +5,6 @@ import core.jdbc.PreparedStatementSetter;
 import core.jdbc.RowMapper;
 import next.model.User;
 
-import java.sql.*;
 import java.util.List;
 
 public class UserDao {

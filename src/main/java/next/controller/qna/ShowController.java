@@ -1,14 +1,12 @@
 package next.controller.qna;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import core.mvc.AbstractController;
-import core.mvc.Controller;
-import core.mvc.JspView;
 import core.mvc.ModelAndView;
 import next.dao.AnswerDao;
 import next.dao.QuestionDao;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class ShowController extends AbstractController {
     @Override
@@ -18,6 +16,6 @@ public class ShowController extends AbstractController {
         AnswerDao answerDao = new AnswerDao();
         req.setAttribute("question", questionDao.findById(questionId));
         req.setAttribute("answers", answerDao.findAllByQuestionId(questionId));
-        return new ModelAndView(new JspView("/qna/show.jsp"));
+        return jspView("/qna/show.jsp");
     }
 }
