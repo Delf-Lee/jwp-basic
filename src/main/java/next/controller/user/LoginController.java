@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.JspView;
 import core.mvc.ModelAndView;
@@ -11,7 +12,7 @@ import next.controller.UserSessionUtils;
 import next.dao.UserDao;
 import next.model.User;
 
-public class LoginController implements Controller {
+public class LoginController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String userId = req.getParameter("userId");

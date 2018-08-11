@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import core.mvc.AbstractController;
 import core.mvc.JsonView;
 import core.mvc.ModelAndView;
 import org.slf4j.Logger;
@@ -16,7 +17,7 @@ import core.mvc.Controller;
 import next.dao.AnswerDao;
 import next.model.Answer;
 
-public class AddAnswerController implements Controller {
+public class AddAnswerController extends AbstractController {
     private static final Logger log = LoggerFactory.getLogger(AddAnswerController.class);
 
     @Override

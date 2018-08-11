@@ -1,5 +1,6 @@
 package next.controller;
 
+import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.JspView;
 import core.mvc.ModelAndView;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class HomeController implements Controller {
+public class HomeController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         QuestionDao questionDao = new QuestionDao();
