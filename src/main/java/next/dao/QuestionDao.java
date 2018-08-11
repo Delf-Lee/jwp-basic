@@ -1,14 +1,37 @@
 package next.dao;
 
 import core.jdbc.JdbcTemplate;
+import core.jdbc.KeyHolder;
+import core.jdbc.PreparedStatementCreator;
 import core.jdbc.RowMapper;
 import next.model.Question;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class QuestionDao {
+
+    public Question insert(Question question) {
+        String sql = "INSERT INTO QUESTIONS (writer, title, contents, createdDate) VALUES (?, ?, ?, ?)";
+        PreparedStatementCreator psc = new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                PreparedStatement pstmt = con.prepareStatement(sql);
+                pstmt.setString(1, question.getWriter());
+                System.out.println("---writer" + question.getWriter());
+                pstmt.setString(2, question.getTitle());
+                pstmt.setString(3, question.getContents());
+                pstmt.setTimestamp(4, new Timestamp(question.getTimeFromCreateDate()));
+                return pstmt;
+            }
+        };
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        KeyHolder keyHolder = new KeyHolder();
+        jdbcTemplate.update(psc, keyHolder);
+        return findById(keyHolder.getId());
+    }
+
     public List<Question> findAll() {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
         String sql = "SELECT questionId, writer, title, createdDate, countOfAnswer FROM QUESTIONS order by questionId desc";

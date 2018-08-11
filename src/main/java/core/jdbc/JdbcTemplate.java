@@ -1,5 +1,7 @@
 package core.jdbc;
 
+import next.dao.QuestionDao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
