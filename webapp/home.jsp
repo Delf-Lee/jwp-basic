@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="kr">
@@ -23,7 +23,8 @@
                                 </strong>
                                 <div class="auth-info">
                                     <i class="icon-add-comment"></i>
-                                    <span class="time"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${each.createdDate}" /></span>
+                                    <span class="time"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
+                                                                       value="${each.createdDate}"/></span>
                                     <a href="#" class="author">${each.writer}</a>
                                 </div>
                                 <div class="reply" title="댓글">
@@ -49,7 +50,15 @@
                     </ul>
                 </div>
                 <div class="col-md-3 qna-write">
-                    <a href="/qna/form" class="btn btn-primary pull-right" role="button">질문하기</a>
+                    <%--<a href="/qna/form" class="btn btn-primary pull-right" role="button">질문하기</a>--%>
+                    <c:choose>
+                        <c:when test="${not empty sessionScope.user}">
+                            <a href="/qna/form" class="btn btn-primary pull-right" role="button">질문하기</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="/users/loginForm" class="btn btn-primary pull-right" role="button">질문하기</a>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>

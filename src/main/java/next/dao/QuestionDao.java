@@ -18,7 +18,6 @@ public class QuestionDao {
             public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
                 PreparedStatement pstmt = con.prepareStatement(sql);
                 pstmt.setString(1, question.getWriter());
-                System.out.println("---writer" + question.getWriter());
                 pstmt.setString(2, question.getTitle());
                 pstmt.setString(3, question.getContents());
                 pstmt.setTimestamp(4, new Timestamp(question.getTimeFromCreateDate()));
