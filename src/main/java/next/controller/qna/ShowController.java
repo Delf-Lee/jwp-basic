@@ -4,18 +4,27 @@ import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
 import next.dao.AnswerDao;
 import next.dao.QuestionDao;
+import next.model.Answer;
+import next.model.Question;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 public class ShowController extends AbstractController {
+    QuestionDao questionDao = new QuestionDao();
+    AnswerDao answerDao = new AnswerDao();
+
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         Long questionId = Long.parseLong(req.getParameter("questionId"));
-        QuestionDao questionDao = new QuestionDao();
-        AnswerDao answerDao = new AnswerDao();
-        req.setAttribute("question", questionDao.findById(questionId));
-        req.setAttribute("answers", answerDao.findAllByQuestionId(questionId));
-        return jspView("/qna/show.jsp");
+        Question question = questionDao.findById(questionId);
+        List<Answer> answers = answerDao.findAllByQuestionId(questionId);
+
+        ModelAndView mnv = jspView("/qna/show.jsp");
+        mnv.addObject("question", question);
+        mnv.addObject("answers", answers);
+
+        return mnv;
     }
 }
