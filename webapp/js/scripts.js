@@ -1,4 +1,3 @@
-// $(".qna-comment").on("click", ".answerWrite input[type=submit]", addAnswer);
 $(".answerWrite input[type=submit]").click(addAnswer);
 
 function addAnswer(e) {
@@ -17,10 +16,15 @@ function addAnswer(e) {
 }
 
 function onSuccess(json, status){
-    var answer = json.answer;
-    var answerTemplate = $("#answerTemplate").html();
-    var template = answerTemplate.format(answer.writer, new Date(answer.createdDate), answer.contents, answer.answerId, answer.answerId);
-    $(".qna-comment-slipp-articles").prepend(template);
+    var result = json.result;
+    if (result.status) {
+        var answer = json.answer;
+        var answerTemplate = $("#answerTemplate").html();
+        var template = answerTemplate.format(answer.writer, new Date(answer.createdDate), answer.contents, answer.answerId, answer.answerId);
+        $(".qna-comment-slipp-articles").prepend(template);
+    } else {
+        alert(result.message);
+    }
 }
 
 function onError(xhr, status) {
