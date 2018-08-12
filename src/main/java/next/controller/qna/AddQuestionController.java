@@ -16,10 +16,6 @@ public class AddQuestionController extends AbstractController {
 
        HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        System.out.println("user:" + user);
-        /*   if (user == null) {
-            return jspView("/users/login.jsp");
-        }*/
 
         Question question = new Question(
                 user.getName(),

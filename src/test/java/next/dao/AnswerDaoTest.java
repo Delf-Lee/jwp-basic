@@ -24,6 +24,5 @@ public class AnswerDaoTest {
         Answer expected = new Answer("javajigi", "answer contents", questionId);
         AnswerDao dut = new AnswerDao();
         Answer answer = dut.insert(expected);
-        System.out.println("Answer : " + answer);
     }
 }

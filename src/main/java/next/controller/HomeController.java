@@ -15,7 +15,6 @@ public class HomeController extends AbstractController {
         QuestionDao questionDao = new QuestionDao();
         req.setAttribute("questions", questionDao.findAll());
         List<Question> list = questionDao.findAll();
-        System.out.println("list size: " + list.size());
 
         return jspView("home.jsp");
     }
