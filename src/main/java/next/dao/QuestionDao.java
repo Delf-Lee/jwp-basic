@@ -5,6 +5,7 @@ import core.jdbc.KeyHolder;
 import core.jdbc.PreparedStatementCreator;
 import core.jdbc.RowMapper;
 import next.model.Question;
+import next.model.User;
 
 import java.sql.*;
 import java.util.List;
@@ -61,5 +62,11 @@ public class QuestionDao {
         };
 
         return jdbcTemplate.queryForObject(sql, rm, questionId);
+    }
+
+    public void update(Question question) {
+        JdbcTemplate template = new JdbcTemplate();
+        String sql = "UPDATE QUESTIONS SET writer = ?, title = ?, contents = ?, createdDate = ?, countOfAnswer = ? WHERE questionId = ?";
+        template.update(sql, question.getWriter(),question.getTitle(), question.getContents(), question.getCreatedDate(), question.getCountOfComment(), question.getQuestionId());
     }
 }

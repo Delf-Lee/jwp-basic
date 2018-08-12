@@ -3,6 +3,7 @@ package next.model;
 import java.util.Date;
 
 public class Question {
+
     private long questionId;
 
     private String writer;
@@ -54,6 +55,10 @@ public class Question {
 
     public int getCountOfComment() {
         return countOfComment;
+    }
+
+    public void setCountOfComment(int cnt) {
+        this.countOfComment = cnt;
     }
 
     @Override

@@ -21,7 +21,6 @@ public class UserDao {
     }
 
     public void update(User user) {
-
         JdbcTemplate template = new JdbcTemplate();
         String sql = "UPDATE USERS SET password = ?, name = ?, email = ? WHERE userId = ?";
         template.update(sql, user.getPassword(), user.getName(), user.getEmail(), user.getUserId());
