@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 public class DispatcherServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
-    private static final String DEFAULT_REDIRECT_PREFIX = "redirect:";
+    private static final String DEFAULT_REDIRECT_PREFIX = JspView.DEFAULT_REDIRECT_PREFIX;
 
     private RequestMapping rm;
 

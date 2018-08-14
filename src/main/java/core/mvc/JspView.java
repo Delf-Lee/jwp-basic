@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class JspView implements View {
-    private static final String DEFAULT_REDIRECT_PREFIX = "redirect:";
+    public static final String DEFAULT_REDIRECT_PREFIX = "redirect:";
 
     private String viewName;
 

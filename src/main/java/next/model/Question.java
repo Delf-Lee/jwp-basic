@@ -1,5 +1,10 @@
 package next.model;
 
+import next.controller.UserSessionUtils;
+import next.dao.UserDao;
+import org.h2.engine.Session;
+
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 public class Question {
@@ -59,6 +64,26 @@ public class Question {
 
     public void setCountOfComment(int cnt) {
         this.countOfComment = cnt;
+    }
+
+    public void update(String title, String contents) {
+        setTitle(title);
+        setContents(contents);
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
+
+    public boolean isSameUser(User user) {
+        if (user == null) {
+            return false;
+        }
+        return user.isSameUser(this.writer);
     }
 
     @Override

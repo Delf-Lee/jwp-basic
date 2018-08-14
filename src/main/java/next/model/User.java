@@ -53,6 +53,10 @@ public class User {
         return userId.equals(user.userId);
     }
 
+    public boolean isSameUser(String userId) {
+        return this.userId.equals(userId);
+    }
+
     public boolean matchPassword(String password) {
         if (password == null) {
             return false;
