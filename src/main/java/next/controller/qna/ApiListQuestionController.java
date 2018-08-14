@@ -8,9 +8,10 @@ import core.mvc.ModelAndView;
 import next.dao.QuestionDao;
 
 public class ApiListQuestionController extends AbstractController {
+    private QuestionDao questionDao = QuestionDao.getInstace();
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        QuestionDao questionDao = new QuestionDao();
+
         return jsonView().addObject("questions", questionDao.findAll());
     }
 }

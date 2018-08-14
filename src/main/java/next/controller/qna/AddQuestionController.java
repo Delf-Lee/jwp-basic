@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class AddQuestionController extends AbstractController {
+    private QuestionDao questionDao = QuestionDao.getInstace();
     @Override
     public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -21,7 +22,6 @@ public class AddQuestionController extends AbstractController {
                 user.getName(),
                 request.getParameter("title"),
                 request.getParameter("contents"));
-        QuestionDao questionDao = new QuestionDao();
         questionDao.insert(question);
 
         return jspView("redirect:/");

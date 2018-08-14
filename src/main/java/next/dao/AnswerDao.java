@@ -10,6 +10,16 @@ import java.sql.*;
 import java.util.List;
 
 public class AnswerDao {
+    private static AnswerDao instance;
+    private AnswerDao(){}
+
+    public static AnswerDao getInstance() {
+        if (instance == null) {
+            instance = new AnswerDao();
+        }
+        return instance;
+    }
+
     public Answer insert(Answer answer) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
         String sql = "INSERT INTO ANSWERS (writer, contents, createdDate, questionId) VALUES (?, ?, ?, ?)";

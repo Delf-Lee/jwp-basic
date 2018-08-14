@@ -12,6 +12,15 @@ import java.util.List;
 
 public class QuestionDao {
 
+    private static QuestionDao instance;
+    private QuestionDao(){}
+    public static QuestionDao getInstace() {
+        if (instance == null) {
+            instance = new QuestionDao();
+        }
+        return instance;
+    }
+
     public Question insert(Question question) {
         String sql = "INSERT INTO QUESTIONS (writer, title, contents, createdDate) VALUES (?, ?, ?, ?)";
         PreparedStatementCreator psc = new PreparedStatementCreator() {

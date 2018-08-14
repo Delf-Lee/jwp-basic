@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class ShowController extends AbstractController {
-
+    private QuestionDao questionDao = QuestionDao.getInstace();
+    private AnswerDao answerDao = AnswerDao.getInstance();
 
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         Long questionId = Long.parseLong(req.getParameter("questionId"));
 
-        QuestionDao questionDao = new QuestionDao();
-        AnswerDao answerDao = new AnswerDao();
+
         Question question = questionDao.findById(questionId);
         List<Answer> answers = answerDao.findAllByQuestionId(questionId);
 
