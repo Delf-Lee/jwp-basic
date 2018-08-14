@@ -3,6 +3,7 @@ package next.controller.qna;
 import core.jdbc.DataAccessException;
 import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
+import next.controller.UserSessionUtils;
 import next.dao.AnswerDao;
 import next.model.Result;
 
@@ -14,6 +15,9 @@ public class DeleteAnswerController extends AbstractController {
 
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        if (UserSessionUtils.isLogined(req.getSession())) {
+            return jspView("redirect:/users/loginForm");
+        }
         Long answerId = Long.parseLong(req.getParameter("answerId"));
         ModelAndView mav = jsonView();
         try {

@@ -1,10 +1,5 @@
 package next.model;
 
-import next.controller.UserSessionUtils;
-import next.dao.UserDao;
-import org.h2.engine.Session;
-
-import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 public class Question {
