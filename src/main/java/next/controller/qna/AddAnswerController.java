@@ -2,7 +2,6 @@ package next.controller.qna;
 
 import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
-import javafx.scene.AmbientLight;
 import next.dao.AnswerDao;
 import next.dao.QuestionDao;
 import next.model.Answer;
@@ -15,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AddAnswerController extends AbstractController {
     private static final Logger log = LoggerFactory.getLogger(AddAnswerController.class);
-    private QuestionDao questionDao = QuestionDao.getInstace();
+    private QuestionDao questionDao = QuestionDao.getInstance();
     private AnswerDao answerDao = AnswerDao.getInstance();
 
     @Override

@@ -14,7 +14,7 @@ public class QuestionDao {
 
     private static QuestionDao instance;
     private QuestionDao(){}
-    public static QuestionDao getInstace() {
+    public static QuestionDao getInstance() {
         if (instance == null) {
             instance = new QuestionDao();
         }
@@ -77,6 +77,12 @@ public class QuestionDao {
         JdbcTemplate template = new JdbcTemplate();
         String sql = "UPDATE QUESTIONS SET writer = ?, title = ?, contents = ?, createdDate = ?, countOfAnswer = ? WHERE questionId = ?";
         template.update(sql, question.getWriter(),question.getTitle(), question.getContents(), question.getCreatedDate(), question.getCountOfComment(), question.getQuestionId());
+    }
+
+    public void delete(Long questionId) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        String sql = "DELETE FROM QUESTIONS WHERE questionId = ?";
+        jdbcTemplate.update(sql, questionId);
     }
 
     public void delete(Question question) {

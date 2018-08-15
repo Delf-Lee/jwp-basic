@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class ShowController extends AbstractController {
-    private QuestionDao questionDao = QuestionDao.getInstace();
+    private QuestionDao questionDao = QuestionDao.getInstance();
     private AnswerDao answerDao = AnswerDao.getInstance();
 
     @Override

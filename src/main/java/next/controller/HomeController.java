@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class HomeController extends AbstractController {
-    private QuestionDao questionDao = QuestionDao.getInstace();
+    private QuestionDao questionDao = QuestionDao.getInstance();
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         req.setAttribute("questions", questionDao.findAll());
