@@ -6,16 +6,16 @@ function addAnswer(e) {
     var queryString = $("form[name=answer]").serialize();
 
     $.ajax({
-        type : 'post',
-        url : '/api/qna/addAnswer',
-        data : queryString,
-        dataType : 'json',
+        type: 'post',
+        url: '/api/qna/addAnswer',
+        data: queryString,
+        dataType: 'json',
         error: onError,
-        success : onSuccess,
+        success: onSuccess,
     });
 }
 
-function onSuccess(json, status){
+function onSuccess(json, status) {
     var result = json.result;
     if (result.status) {
         var answer = json.answer;
@@ -57,9 +57,9 @@ function deleteAnswer(e) {
     });
 }
 
-String.prototype.format = function() {
+String.prototype.format = function () {
     var args = arguments;
-    return this.replace(/{(\d+)}/g, function(match, number) {
+    return this.replace(/{(\d+)}/g, function (match, number) {
         return typeof args[number] != 'undefined'
             ? args[number]
             : match
