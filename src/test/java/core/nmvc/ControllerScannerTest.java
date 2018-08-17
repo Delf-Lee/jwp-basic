@@ -1,5 +1,6 @@
 package core.nmvc;
 
+import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.junit.Before;

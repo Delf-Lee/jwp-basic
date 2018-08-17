@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.google.common.collect.Maps;
 
+import com.google.common.collect.Sets;
 import core.annotation.RequestMapping;
 import core.annotation.RequestMethod;
+import org.reflections.ReflectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,12 +20,13 @@ public class AnnotationHandlerMapping {
 
     private Map<HandlerKey, HandlerExecution> handlerExecutions = Maps.newHashMap();
     private static final Logger logger = LoggerFactory.getLogger(AnnotationHandlerMapping.class);
+
     public AnnotationHandlerMapping(Object... basePackage) {
         this.basePackage = basePackage;
     }
 
     public void initialize() {
-        /*ControllerScanner controllerScanner = new ControllerScanner(basePackage);
+        ControllerScanner controllerScanner = new ControllerScanner(basePackage);
         Map<Class<?>, Object> controllers = controllerScanner.getControllers();
         Set<Method> methods = getRequestMappingMethods(controllers.keySet());
         for (Method method : methods) {
@@ -32,7 +35,16 @@ public class AnnotationHandlerMapping {
             handlerExecutions.put(createHandlerKey(rm), new HandlerExecution(controllers.get(method.getDeclaringClass()), method));
         }
 
-        logger.info("Initialized AnnotationHandlerMapping!");*/
+        logger.info("Initialized AnnotationHandlerMapping!");
+    }
+
+    @SuppressWarnings("unchecked")
+    private Set<Method> getRequestMappingMethods(Set<Class<?>> controlleers) {
+        Set<Method> requestMappingMethods = Sets.newHashSet();
+        for (Class<?> clazz : controlleers) {
+            requestMappingMethods.addAll(ReflectionUtils.getAllMethods(clazz, ReflectionUtils.withAnnotation(RequestMapping.class)));
+        }
+        return requestMappingMethods;
     }
 
     private HandlerKey createHandlerKey(RequestMapping rm) {
