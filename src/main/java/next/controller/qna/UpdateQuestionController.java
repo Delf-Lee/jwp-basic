@@ -16,7 +16,7 @@ public class UpdateQuestionController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         if (!UserSessionUtils.isLogined(request.getSession())) {
-            return jspView("redirect:/users/loginForm");
+            return jspView("redirect:/users/login");
         }
         Question question = questionDao.findById(Long.parseLong(request.getParameter("questionId")));
 

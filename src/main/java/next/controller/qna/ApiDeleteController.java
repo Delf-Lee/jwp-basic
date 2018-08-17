@@ -18,7 +18,7 @@ public class ApiDeleteController extends AbstractController {
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
         if (!UserSessionUtils.isLogined(req.getSession())) {
-            return jspView(JspView.DEFAULT_REDIRECT_PREFIX + "/users/loginForm");
+            return jspView(JspView.DEFAULT_REDIRECT_PREFIX + "/users/login");
         }
 
         Long questionId = Long.parseLong(req.getParameter("questionId"));

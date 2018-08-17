@@ -16,7 +16,7 @@ public class DeleteAnswerController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         if (UserSessionUtils.isLogined(req.getSession())) {
-            return jspView("redirect:/users/loginForm");
+            return jspView("redirect:/users/login");
         }
         Long answerId = Long.parseLong(req.getParameter("answerId"));
         ModelAndView mav = jsonView();
