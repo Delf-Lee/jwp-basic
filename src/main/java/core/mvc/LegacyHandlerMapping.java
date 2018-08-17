@@ -3,7 +3,6 @@ package core.mvc;
 import core.nmvc.HandlerMapping;
 import next.controller.HomeController;
 import next.controller.qna.*;
-import next.controller.user.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LegacyRequestMapping implements HandlerMapping{
+public class LegacyHandlerMapping implements HandlerMapping{
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
     private Map<String, Controller> mappings = new HashMap<>();
 
@@ -33,10 +32,7 @@ public class LegacyRequestMapping implements HandlerMapping{
         mappings.put("/qna/show", new ShowController());
         mappings.put("/api/qna/addAnswer", new AddAnswerController());
         mappings.put("/api/qna/deleteAnswer", new DeleteAnswerController());
-
         mappings.put("/api/qna/list", new ApiListQuestionController());
-
-
 
         logger.info("Initialized Request Mapping!");
     }
