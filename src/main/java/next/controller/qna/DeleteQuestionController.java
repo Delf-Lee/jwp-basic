@@ -23,7 +23,7 @@ public class DeleteQuestionController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         if (!UserSessionUtils.isLogined(request.getSession())) {
-            return jspView(JspView.DEFAULT_REDIRECT_PREFIX + "/users/loginForm");
+            return jspView(JspView.DEFAULT_REDIRECT_PREFIX + "/users/login");
         }
 
         Long questionId = Long.parseLong(request.getParameter("questionId"));

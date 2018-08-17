@@ -67,7 +67,7 @@ public class UserDao {
                 rs.getString("name"),
                 rs.getString("email"));
 
-        String sql = "SELECT userId, password, name, email FROM USERS WHERE userid=?";
+        String sql = "SELECT userId, password, name, email FROM USERS WHERE userId=?";
         return template.queryForObject(sql, rowMapper, pss);
     }
 }

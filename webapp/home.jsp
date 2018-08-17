@@ -56,7 +56,7 @@
                             <a href="/qna/form" class="btn btn-primary pull-right" role="button">질문하기</a>
                         </c:when>
                         <c:otherwise>
-                            <a href="/users/loginForm" class="btn btn-primary pull-right" role="button">질문하기</a>
+                            <a href="/users/login" class="btn btn-primary pull-right" role="button">질문하기</a>
                         </c:otherwise>
                     </c:choose>
                 </div>
