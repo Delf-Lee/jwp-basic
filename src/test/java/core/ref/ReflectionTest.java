@@ -43,6 +43,7 @@ public class ReflectionTest {
         Student student = new Student();
         Field nameField = clazz.getDeclaredField("name"); // NoSuchFieldException
         nameField.setAccessible(true);
+
         nameField.set(student, "데르프"); // IllegalAccessException
         logger.debug("name: " + student.getName());
     }
