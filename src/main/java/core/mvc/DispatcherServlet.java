@@ -19,21 +19,14 @@ import java.util.List;
 public class DispatcherServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
-    private List<HandlerMapping> mappings = Lists.newArrayList();
-    private List<HandlerAdapter> handlerAdapters = Lists.newArrayList();
+    private HandlerMapping handlerMapping;
+    private HandlerAdapter handlerAdapter = new HandlerExecutionHandlerAdapter();
 
     @Override
     public void init() throws ServletException {
-        LegacyHandlerMapping lhm = new LegacyHandlerMapping();
-        lhm.initMapping();
         AnnotationHandlerMapping ahm = new AnnotationHandlerMapping("next.controller");
         ahm.initialize();
-
-        mappings.add(lhm);
-        mappings.add(ahm);
-
-        handlerAdapters.add(new ControllerHandlerAdapter());
-        handlerAdapters.add(new HandlerExecutionHandlerAdapter());
+        handlerMapping = ahm;
     }
 
     @Override
@@ -56,20 +49,16 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     private ModelAndView execute(Object handler, HttpServletRequest req, HttpServletResponse res) throws Exception {
-        for (HandlerAdapter handlerAdapter : handlerAdapters) {
-            if (handlerAdapter.supports(handler)) {
-                return handlerAdapter.handle(req, res, handler);
-            }
+        if (handlerAdapter.supports(handler)) {
+            return handlerAdapter.handle(req, res, handler);
         }
         return null;
     }
 
     private Object getHandler(HttpServletRequest req) {
-        for (HandlerMapping handlerMapping : mappings) {
-            Object handler = handlerMapping.getHandler(req);
-            if (handler != null) {
-                return handler;
-            }
+        Object handler = handlerMapping.getHandler(req);
+        if (handler != null) {
+            return handler;
         }
         return null;
     }
